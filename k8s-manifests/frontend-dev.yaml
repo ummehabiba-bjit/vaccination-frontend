@@ -1,0 +1,87 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: vaccination-system-dev
+  labels:
+    name: vms
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-service-deployment 
+  namespace: vaccination-system-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vms
+  template:
+    metadata:
+      labels:
+        app: vms
+    spec:
+      containers:
+        - name: frontend-service-pod
+          image: 678554781153.dkr.ecr.ap-southeast-1.amazonaws.com/vaccination-system-images:frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 300m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service-loadbalancer
+  namespace: vaccination-system-dev
+  labels:
+    svc: vms
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-internal: "false"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+
+spec:
+  type: LoadBalancer
+  selector:
+    app: vms
+  ports:
+  - name: http-web
+    protocol: TCP
+    port: 80
+    targetPort: 3000
+  - name: https-web
+    protocol: TCP
+    port: 443
+    targetPort: 3000
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend-service-hpa
+  namespace: vaccination-system-dev
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: frontend-service-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: AverageValue
+        averageValue: 400Mi
