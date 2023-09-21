@@ -14,11 +14,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vms
+      vms: frontend
   template:
     metadata:
       labels:
-        app: vms
+        vms: frontend
     spec:
       containers:
         - name: frontend-service-pod
@@ -32,7 +32,7 @@ spec:
               memory: 500Mi
             requests:
               cpu: 100m
-              memory: 200Mi
+              memory: 250Mi
 ---
 apiVersion: v1
 kind: Service
@@ -49,7 +49,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: vms
+    vms: frontend
   ports:
   - name: http-web
     protocol: TCP
