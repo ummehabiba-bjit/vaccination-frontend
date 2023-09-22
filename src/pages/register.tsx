@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import { SyntheticEvent, useState } from 'react'
 import { deleteCookie, getCookie } from 'cookies-next'
 import axios from 'axios'
-import { REGISTRATION_URL } from '@lib/api-urls'
 
 const Register: NextPage = () => {
   const router = useRouter()
@@ -34,7 +33,7 @@ const Register: NextPage = () => {
     setSubmitting(true)
 
     const formdata = new FormData(e.currentTarget)
-    const res = await axios.post(REGISTRATION_URL, formdata)
+    const res = await axios.post('/api/register', Object.fromEntries(formdata))
     if (res.status === 200) {
       router.push(getRedirect())
     }
