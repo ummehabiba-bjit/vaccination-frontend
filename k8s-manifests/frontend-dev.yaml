@@ -20,6 +20,9 @@ spec:
       labels:
         vms: frontend
     spec:
+      env:
+        - name: AUTH_SERVICE_BASE_URL
+          value: 'http://auth-service:8002/api/'
       containers:
         - name: frontend-service-pod
           image: 678554781153.dkr.ecr.ap-southeast-1.amazonaws.com/vaccination-system-images:frontend
