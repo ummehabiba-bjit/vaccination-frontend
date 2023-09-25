@@ -33,7 +33,7 @@ phases:
     commands:
       - echo "Apply changes to kube manifests"  
       - kubectl get pods -A
-      - kubectl delete -f k8s-manifests/frontend-dev.yml
+      - envsubst < k8s-manifests/frontend-dev.yaml | kubectl delete -f -
       - envsubst < k8s-manifests/frontend-dev.yaml | kubectl apply -f -
 
 
