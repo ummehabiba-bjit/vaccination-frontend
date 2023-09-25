@@ -27,7 +27,7 @@ phases:
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - echo "Update Kube Config"
-      - aws eks update-kubeconfig --name vaccination-system-eks $AWS_DEFAULT_REGION:
+      - aws eks update-kubeconfig --name vaccination-system-eks $AWS_DEFAULT_REGION
       
   post_build:
     commands:
