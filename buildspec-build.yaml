@@ -38,9 +38,9 @@ phases:
 artifacts:
   files:
     - docker-image.tar.gz
-    - buildspec-trivy-scan.yml
-    - buildspec-push.yml
-    - buildspec-deploy.yml
+    - buildspec-trivy-scan.yaml
+    - buildspec-push.yaml
+    - buildspec-deploy.yaml
     - k8s-manifests/frontend-dev.yaml
     
 privilegedMode: true
