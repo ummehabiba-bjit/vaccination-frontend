@@ -22,8 +22,11 @@ spec:
     spec:
       containers:
         - name: frontend-service-pod
-          image: 678554781153.dkr.ecr.ap-southeast-1.amazonaws.com/vaccination-system-images:frontend
+          image: ${ECR_REGISTRY_URI}:${IMAGE_TAG}
           imagePullPolicy: Always
+          env:
+            - name: AUTH_SERVICE_BASE_URL
+              value: 'http://auth-service:8002/api/'
           ports:
             - containerPort: 3000
           resources:
@@ -33,32 +36,6 @@ spec:
             requests:
               cpu: 100m
               memory: 250Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service-loadbalancer
-  namespace: vaccination-system-dev
-  labels:
-    svc: vms
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb
-    service.beta.kubernetes.io/aws-load-balancer-internal: "false"
-    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
-
-spec:
-  type: LoadBalancer
-  selector:
-    vms: frontend
-  ports:
-  - name: http-web
-    protocol: TCP
-    port: 80
-    targetPort: 3000
-  - name: https-web
-    protocol: TCP
-    port: 443
-    targetPort: 3000
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
