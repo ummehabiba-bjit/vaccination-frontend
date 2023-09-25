@@ -25,8 +25,8 @@ spec:
           image: ${ECR_REGISTRY_URI}:${IMAGE_TAG}
           imagePullPolicy: Always
           env:
-            - name: AUTH_SERVICE_BASE_URL
-              value: 'http://auth-service:8002/api/'
+            - name: AUTH_SERVICE_API_BASE_URL
+              value: 'http://auth-service:8002/api'
           ports:
             - containerPort: 3000
           resources:
