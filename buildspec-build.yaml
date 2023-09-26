@@ -42,5 +42,7 @@ artifacts:
     - buildspec-push.yaml
     - buildspec-deploy.yaml
     - k8s-manifests/frontend-dev.yaml
+    - k8s-manifests/frontend-dev-loadbalancer.yaml
+    - k8s-manifests/frontend-autoscaling.yaml
     
 privilegedMode: true
