@@ -7,21 +7,13 @@ import Link from 'next/link'
 import { SyntheticEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next'
 
 const Login: NextPage = () => {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
 
-  const getRedirect = () => {
-    const redirect = getCookie('redirect')
-    if (redirect) {
-      deleteCookie('redirect')
-      return redirect.toString()
-    }
-
-    return '/'
-  }
+  const getRedirect = () => '/'
 
   const login = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.stopPropagation()

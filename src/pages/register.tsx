@@ -10,22 +10,13 @@ import {
 } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import { SyntheticEvent, useState } from 'react'
-import { deleteCookie, getCookie } from 'cookies-next'
 import axios from 'axios'
 
 const Register: NextPage = () => {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
 
-  const getRedirect = () => {
-    const redirect = getCookie('redirect')
-    if (redirect) {
-      deleteCookie('redirect')
-      return redirect.toString()
-    }
-
-    return '/login'
-  }
+  const getRedirect = () => '/login'
 
   const register = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.stopPropagation()
