@@ -33,7 +33,7 @@ const AppointmentEdit: NextPage = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       | any
   }>(
-    { url: `${APPOINTMENT_URL}/${appointmentId}` },
+    { url: `api/appointment?id=${appointmentId}` },
     { data: { user: {}, hospitals: [], vaccines: [], appointment: {} } }
   )
 

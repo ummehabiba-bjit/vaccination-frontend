@@ -3,7 +3,6 @@ import { Card, Table } from 'react-bootstrap'
 import React from 'react'
 import { AdminLayout } from '@layout'
 import { useSWRAxios } from '@hooks'
-import { USER_APPOINTMENT_URL } from '@lib/api-urls'
 import { THSort } from '@components/TableSort'
 import { setCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
@@ -16,7 +15,7 @@ const Appointments: NextPage = () => {
     error: swrError,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } = useSWRAxios<{ user: any; appointments: any[] }>(
-    { url: `${USER_APPOINTMENT_URL}` },
+    { url: '/api/appointments' },
     { data: { user: {}, appointments: [] } }
   )
 
