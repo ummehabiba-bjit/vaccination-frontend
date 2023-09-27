@@ -4,6 +4,7 @@ env:
   variables:
     IMAGE_TAG: frontend
   parameter-store:
+    CLUSTER_NAME: cluster-name
     ECR_REGISTRY_URI: ecr-registry-uri
     AWS_DEFAULT_REGION: default-region-aws
     ACCOUNT_ID: account-id
@@ -28,7 +29,7 @@ phases:
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - echo "Update Kube Config"
-      - aws eks update-kubeconfig --name vaccination-system-eks --region $AWS_DEFAULT_REGION
+      - aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_DEFAULT_REGION
       
   post_build:
     commands:
