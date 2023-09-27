@@ -113,26 +113,6 @@ const Register: NextPage = () => {
                   </InputGroup>
 
                   <InputGroup className="mb-3">
-                    <Form.Control
-                      name="father_name"
-                      required
-                      disabled={submitting}
-                      placeholder="Father name"
-                      aria-label="Father name"
-                    />
-                  </InputGroup>
-
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      name="mather_name"
-                      required
-                      disabled={submitting}
-                      placeholder="Mather name"
-                      aria-label="Mather name"
-                    />
-                  </InputGroup>
-
-                  <InputGroup className="mb-3">
                     <Form.Label className="w-100">Date of birth</Form.Label>
                     <Form.Control
                       type="date"
@@ -161,35 +141,6 @@ const Register: NextPage = () => {
                       disabled={submitting}
                       placeholder="Mobile Number"
                       aria-label="Mobile Number"
-                    />
-                  </InputGroup>
-
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      name="blood_group"
-                      required
-                      disabled={submitting}
-                      placeholder="Blood Group"
-                      aria-label="Blood Group"
-                    />
-                  </InputGroup>
-
-                  <InputGroup className="mb-3">
-                    <Form.Select name="marital_status">
-                      <option value="1">Married</option>
-                      <option value="2">Unmarried</option>
-                    </Form.Select>
-                  </InputGroup>
-
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      disabled={submitting}
-                      required
-                      name="address"
-                      as="textarea"
-                      rows={3}
-                      placeholder="Address"
-                      aria-label="Address"
                     />
                   </InputGroup>
 
