@@ -7,7 +7,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const response = await axios.get(USER_APPOINTMENT_URL)
+    const response = await axios.get(USER_APPOINTMENT_URL, {
+      headers: { Authorization: `Bearer ${req.cookies.auth}` },
+    })
     res.status(200).json(response.data)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {

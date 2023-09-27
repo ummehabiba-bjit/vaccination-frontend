@@ -1,6 +1,5 @@
 import useSWRAxios from '@hooks/useSWRAxios'
 import { AdminLayout } from '@layout'
-import { APPOINTMENT_URL } from '@lib/api-urls'
 import axios from 'axios'
 import { setCookie, getCookie } from 'cookies-next'
 import { NextPage } from 'next'
@@ -33,7 +32,7 @@ const AppointmentEdit: NextPage = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       | any
   }>(
-    { url: `api/appointment?id=${appointmentId}` },
+    { url: !appointmentId ? undefined : `/api/appointment?id=${appointmentId}` },
     { data: { user: {}, hospitals: [], vaccines: [], appointment: {} } }
   )
 
@@ -73,8 +72,8 @@ const AppointmentEdit: NextPage = () => {
 
     formData.set('user_id', response?.user?.id)
     const res = await axios.post(
-      `${APPOINTMENT_URL}/${response.appointment.id}`,
-      formData,
+      `/api/appointment?id=${response.appointment.id}`,
+      Object.fromEntries(formData),
       {
         headers: {
           Authorization: `Bearer ${authSession}`,

@@ -39,7 +39,7 @@ const AppointmentCreate: NextPage = () => {
 
     const formdata = new FormData(e.currentTarget)
     formdata.set('user_id', response?.user?.id)
-    const res = await axios.post('/api/appointment', formdata, {
+    const res = await axios.post('/api/appointment', Object.fromEntries(formdata), {
       headers: { Authorization: `Bearer ${authSession}` },
     })
     if (res.status === 200) {
