@@ -3,7 +3,7 @@ version: 0.2
 env:
   shell: "/bin/sh"
   variables:
-    IMAGE_TAG: registration-service
+    IMAGE_TAG: frontend
 phases:
   install:
     runtime-versions:
